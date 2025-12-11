@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UBE Lexical Analyzer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<div class="container">
+
+  <h2>UBE Lexical Analyzer</h2>
+
+  <div class="controls">
+    <button class="btn-primary" onclick="analyze()">Analyze</button>
+    <button class="btn-green" onclick="insertSample()">Insert Sample</button>
+    <button class="btn-secondary" onclick="clearAll()">Clear</button>
+    <button class="btn-primary" onclick="downloadCSV()">Download CSV</button>
+  </div>
+
+  <!-- Editor -->
+  <div class="editor-wrapper">
+    <div id="lineNumbers">1</div>
+    <textarea id="code" oninput="updateLineNumbers()" onscroll="syncScroll()" spellcheck="false"></textarea>
+  </div>
+
+  <table id="tokenTable">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Lexeme</th>
+        <th>Token</th>
+        <th>Line</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
