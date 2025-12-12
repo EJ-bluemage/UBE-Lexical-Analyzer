@@ -7,40 +7,43 @@
 <link rel="icon" href="icons/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 <div class="container">
-
-   <img src="images/UBE.png" alt="UBE Logo" class="logo">
-
+  <img src="images/UBE.png" alt="UBE Logo" class="logo">
   <h2>UBE Lexical Analyzer</h2>
-  <h3 class="subtitle">"The Ultimate Bonding Experience"<div class="controls">
+  <h3 class="subtitle">"The Ultimate Bonding Experience"</h3>
+  
+  <div class="controls">
     <button class="btn-primary" onclick="analyze()">Analyze</button>
     <button class="btn-green" onclick="insertSample()">Insert Sample</button>
     <button class="btn-secondary" onclick="clearAll()">Clear</button>
     <button class="btn-primary" onclick="downloadCSV()">Download CSV</button>
   </div>
-
-  <!-- Editor -->
-  <div class="editor-wrapper">
-    <div id="lineNumbers">1</div>
-    <textarea id="code" oninput="updateLineNumbers()" onscroll="syncScroll()" spellcheck="false"></textarea>
+  
+  <!-- Main Content Area -->
+  <div class="main-content">
+    <!-- Editor -->
+    <div class="editor-wrapper">
+      <div id="lineNumbers">1</div>
+      <textarea id="code" oninput="updateLineNumbers()" onscroll="syncScroll()" spellcheck="false"></textarea>
+    </div>
+    
+    <!-- Table -->
+    <div class="table-wrapper">
+      <table id="tokenTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Lexeme</th>
+            <th>Token</th>
+            <th>Line</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
   </div>
-
-  <table id="tokenTable">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Lexeme</th>
-        <th>Token</th>
-        <th>Line</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
-
 </div>
-
 <script src="script.js"></script>
 </body>
 </html>
