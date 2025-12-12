@@ -3,7 +3,7 @@
   --editor-line-height:20px;
   --editor-padding:10px;
   --gutter-width:56px;
-  --gutter-bg:#f1f1f1;
+  --gutter-bg:#374151;
   --editor-bg:#fffefc;
 }
 
@@ -27,19 +27,48 @@ h2{ text-align:center; margin-top:0; }
 
 .controls{ margin-bottom:10px; }
 
-button{
-  padding:8px 14px;
-  margin-right:6px;
-  border:none;
-  border-radius:6px;
-  cursor:pointer;
-  font-weight:600;
+button {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.20s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.12);
 }
 
-.btn-primary{ background:#2563eb; color:white; }
-.btn-secondary{ background:#4b5563; color:white; }
-.btn-green{ background:#16a34a; color:white; }
+.btn-primary {
+  background: #2563eb;
+  color: white;
+}
+.btn-primary:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+}
 
+.btn-secondary {
+  background: #4b5563;
+  color: white;
+}
+.btn-secondary:hover {
+  background: #374151;
+  transform: translateY(-2px);
+}
+
+.btn-green {
+  background: #16a34a;
+  color: white;
+}
+.btn-green:hover {
+  background: #15803d;
+  transform: translateY(-2px);
+}
+
+/* Button active click effect */
+button:active {
+  transform: scale(0.97);
+}
 .editor-wrapper{
   display:flex;
   border:1px solid #ccc;
@@ -53,6 +82,7 @@ button{
   width:var(--gutter-width);
   min-width:var(--gutter-width);
   background:var(--gutter-bg);
+  color: white;
   padding:var(--editor-padding);
   padding-right:8px;
   text-align:right;
@@ -80,19 +110,33 @@ button{
   background:transparent;
 }
 
-table{
-  width:100%;
-  border-collapse:collapse;
-  margin-top:16px;
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
 }
 
-th, td{
-  border:1px solid #ccc;
-  padding:6px 10px;
-  font-family:monospace;
+thead {
+  background: #374151;
+  color: white;
 }
 
-th{ background:#eee; }
+th, td {
+  padding: 10px 14px;
+  font-family: monospace;
+  border: 1px solid #d1d5db;
+}
+
+tbody tr:nth-child(even) {
+  background: #f3f4f6;
+}
+
+tbody tr:hover {
+  background: #e5e7eb;
+}
 
 @media (max-width:600px){
   .container{ padding:12px; }
@@ -101,4 +145,13 @@ th{ background:#eee; }
     --editor-font-size:13px;
     --editor-line-height:18px;
   }
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  padding: 10px 0;
 }
