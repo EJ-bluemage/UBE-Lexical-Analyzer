@@ -3,7 +3,7 @@
    --------------------------- */
 const TOKEN_MAP = {
   "+": "plus_op", "-": "sub_op", "*": "mul_op", "/": "div_op", "%": "mod_op",
-  "=": "equal_sign", "==": "equality_op", "!=": "neq_op",
+  "=": "equal_sign", "==": "equality_op", "!=": "not_equal_op", "!": "not_operator", 
   "<": "lesser_than_op", ">": "greater_than_op", "<=": "lesser_than_or_eq_op", ">=": "greater_than_or_eq_op",
   "&&": "and_op", "||": "or_op",
   "++": "inc_op", "--": "dec_op",
@@ -11,16 +11,18 @@ const TOKEN_MAP = {
   "*=": "mul_assign", "/=": "div_assign",
   ";": "semicolon", ",": "comma",
   ":": "colon", ".": "dot", "#": "hash",
+  "?": "question_mark", "_": "underscore",
   "(": "left_paren", ")": "right_paren",
   "{": "left_brace", "}": "right_brace",
-  "[": "left_bracket", "]": "right_bracket"
+  "[": "left_bracket", "]": "right_bracket",
+  "&": "bitwise_and", "|": "bitwise_or", "^": "bitwise_xor", "~": "bitwise_complement", "<<": "bitwise_left_shift", ">>": "bitwise_right_shift"
 };
 const KEYWORDS = new Set(["int","float","char","double","void","return","if","else","while","for","struct","bond", "unbond", "attach", "detach"]);
-const MULTI_OPS = ["==","!=","<=",">=","&&","||","++","--","+=","-=","*=","/="];
-const SINGLE_OPS = new Set(["+","-","*","/","%","=","<",">","!","&","|"]);
-const PUNC = new Set(["(",")","{","}","[","]",";",",", ":",".","#"]);
+const MULTI_OPS = ["==","!=","<=",">=","&&","||","++","--","+=","-=","*=","/=", "<<", ">>"];
+const SINGLE_OPS = new Set(["+","-","*","/","%","=","<",">","!","&","|", "&", "^", "~"]);
+const PUNC = new Set(["(",")","{","}","[","]",";",",", ":",".","#", "?", "_"]);
 
-function isAlpha(c){ return /[A-Za-z_]/.test(c); }
+function isAlpha(c){ return /[A-Za-z]/.test(c); }
 function isDigit(c){ return /[0-9]/.test(c); }
 function isAlphaNum(c){ return /[A-Za-z0-9_]/.test(c); }
 function resolveTokenName(type, lexeme){
