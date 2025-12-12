@@ -17,7 +17,7 @@ const TOKEN_MAP = {
   "[": "left_bracket", "]": "right_bracket",
   "&": "bitwise_and", "|": "bitwise_or", "^": "bitwise_xor", "~": "bitwise_complement", "<<": "bitwise_left_shift", ">>": "bitwise_right_shift"
 };
-const KEYWORDS = new Set(["break", "case", "char", "const", "default", "do", "double", "else", "float", "for", "if", "int", "printf", "return", "scanf", "void", "while"]);
+const KEYWORDS = new Set(["break", "case", "char", "const", "default", "do", "double", "else", "float", "for", "if", "int", "printf", "return", "scanf", "struct", "void", "while"]);
 const RESERVED_WORDS = new Set(["attach", "bond", "cast", "continue", "detach", "main", "unbond"]);
 const MULTI_OPS = ["==","!=","<=",">=","&&","||","++","--","+=","-=","*=","/=", "<<", ">>"];
 const SINGLE_OPS = new Set(["+","-","*","/","%","=","<",">","!","&","|", "^", "~"]);
