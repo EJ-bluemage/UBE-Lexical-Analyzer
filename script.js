@@ -1,5 +1,5 @@
 /* ---------------------------
-  Token definitions (kept as before)
+  Token definitions
    --------------------------- */
 const TOKEN_MAP = {
   "+": "plus_op", "-": "sub_op", "*": "mul_op", "/": "div_op", "%": "mod_op",
@@ -10,6 +10,7 @@ const TOKEN_MAP = {
   "+=": "plus_assign", "-=": "sub_assign",
   "*=": "mul_assign", "/=": "div_assign",
   ";": "semicolon", ",": "comma",
+  ":": "colon", ".": "dot", "#": "hash",
   "(": "left_paren", ")": "right_paren",
   "{": "left_brace", "}": "right_brace",
   "[": "left_bracket", "]": "right_bracket"
@@ -17,7 +18,7 @@ const TOKEN_MAP = {
 const KEYWORDS = new Set(["int","float","char","double","void","return","if","else","while","for","struct","bond", "unbond", "attach", "detach"]);
 const MULTI_OPS = ["==","!=","<=",">=","&&","||","++","--","+=","-=","*=","/="];
 const SINGLE_OPS = new Set(["+","-","*","/","%","=","<",">","!","&","|"]);
-const PUNC = new Set(["(",")","{","}","[","]",";",","]);
+const PUNC = new Set(["(",")","{","}","[","]",";",",", ":",".","#"]);
 
 function isAlpha(c){ return /[A-Za-z_]/.test(c); }
 function isDigit(c){ return /[0-9]/.test(c); }
@@ -30,7 +31,7 @@ function resolveTokenName(type, lexeme){
 }
 
 /* ---------------------------
-  LEXER (unchanged)
+  LEXER
    --------------------------- */
 function lex(code){
   const tokens = [];
@@ -130,16 +131,7 @@ function analyze(){
 }
 
 function insertSample(){
-  const sample = `#include <stdio.h>
-
-int main() {
-    printf("Welcome to UBE\\n");
-    int a = 10;
-    if (a > 5) {
-        a += 2;
-    }
-    return 0;
-}`;
+  const sample = `printf("Welcome to UBE\\n");`;
   document.getElementById("code").value = sample;
   updateLineNumbers();
   // ensure gutter is scrolled to top
@@ -169,38 +161,25 @@ function downloadCSV() {
 }
 
 /* ---------------------------
-  LINE NUMBER SYSTEM (fixed)
-  - Ensure same box-sizing, font-size, line-height, padding between gutter and textarea.
-  - Keep a fixed pixel line-height and update gutter content on input.
-  - Keep both scrollTop in sync.
+  LINE NUMBER SYSTEM
    --------------------------- */
 function updateLineNumbers(){
   const code = document.getElementById("code");
   const lineNumbers = document.getElementById("lineNumbers");
 
-  // create line count
   const count = Math.max(1, code.value.split("\n").length);
   lineNumbers.textContent = Array.from({length:count}, (_,i)=>i+1).join("\n");
 
-  // ensure the gutter height matches the textarea inner height (so lines align across resize)
-  // textarea.clientHeight excludes its borders; lineNumbers is box-sizing:border-box so set its height to match
   lineNumbers.style.height = code.clientHeight + "px";
 }
 
 function syncScroll(){
   const code = document.getElementById("code");
   const lineNumbers = document.getElementById("lineNumbers");
-  // sync vertical scrolling
   lineNumbers.scrollTop = code.scrollTop;
 }
 
-/* initialize line numbers on page load */
 document.addEventListener("DOMContentLoaded", () => {
-  // set a sample small placeholder so updateLineNumbers picks up correct heights
   updateLineNumbers();
-
-  // if window resized, recalc gutter height so lines keep aligned
   window.addEventListener("resize", updateLineNumbers);
-
-  // also recalc if fonts change (rare) - using a small interval debounce could be added but this is enough
 });
