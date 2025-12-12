@@ -66,14 +66,14 @@ function lex(code){
       let j=i+1;
       while(j<code.length && code[j] !== '"') j++;
       j++;
-      tokens.push({ token:"String", lexeme:code.slice(i,j), line:startLine });
+      tokens.push({ token:"String_literal", lexeme:code.slice(i,j), line:startLine });
       i=j; continue;
     }
 
     if(isDigit(c)){
       let j=i;
       while(j<code.length && isDigit(code[j])) j++;
-      tokens.push({ token:"int_literal", lexeme:code.slice(i,j), line:startLine });
+      tokens.push({ token:"Int_literal", lexeme:code.slice(i,j), line:startLine });
       i=j; continue;
     }
 

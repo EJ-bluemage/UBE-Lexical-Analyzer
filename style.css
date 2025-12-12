@@ -231,12 +231,6 @@ thead {
         border-bottom: 2px solid #d5c3ff;
     }
 
-        thead th:first-child {
-            background: #linear-gradient(135deg, #667eea 0%, #764ba2 100%);;
-            color: #f8ecff;
-            font-weight: 700;
-        }
-
 tbody tr {
     background: white;
     transition: 0.2s ease;
