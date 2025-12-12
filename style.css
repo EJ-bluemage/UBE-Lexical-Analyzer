@@ -23,7 +23,11 @@ body{
   box-shadow:0 0 10px rgba(0,0,0,0.08);
 }
 
-h2{ text-align:center; margin-top:0; }
+h2 {
+  text-align: center;
+  margin-bottom: 4px;
+  margin-top: 2px;
+}
 
 .controls{ margin-bottom:10px; }
 
@@ -48,11 +52,11 @@ button {
 }
 
 .btn-secondary {
-  background: #4b5563;
+  background: #374151;
   color: white;
 }
 .btn-secondary:hover {
-  background: #374151;
+  background: #363f4d;
   transform: translateY(-2px);
 }
 
@@ -154,4 +158,24 @@ tbody tr:hover {
   margin-bottom: 20px;
   flex-wrap: wrap;
   padding: 10px 0;
+}
+
+.subtitle {
+  text-align: center;
+  font-weight: 500; 
+  color: #6b7280; 
+  margin-top: 0;
+  margin-bottom: 15px; 
+  font-size: 1.02em; 
+  letter-spacing: 0.5px; 
+  padding-bottom: 5px; 
+  border-bottom: 2px solid #ddd; 
+}
+
+.logo {
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 0;
+  width: 40px;
+  height: auto;
 }
