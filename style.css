@@ -170,6 +170,7 @@ tbody tr:hover {
   letter-spacing: 0.5px; 
   padding-bottom: 5px; 
   border-bottom: 2px solid #ddd; 
+  font-family: 'Arial', sans-serif;
 }
 
 .logo {
