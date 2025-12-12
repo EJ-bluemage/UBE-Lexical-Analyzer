@@ -17,7 +17,8 @@ const TOKEN_MAP = {
   "[": "left_bracket", "]": "right_bracket",
   "&": "bitwise_and", "|": "bitwise_or", "^": "bitwise_xor", "~": "bitwise_complement", "<<": "bitwise_left_shift", ">>": "bitwise_right_shift"
 };
-const KEYWORDS = new Set(["int","float","char","double","void","return","if","else","while","for","struct","bond", "unbond", "attach", "detach"]);
+const KEYWORDS = new Set(["break", "case", "char", "const", "default", "do", "double", "else", "float", "for", "if", "printf", "return", "scanf", "void", "while"]);
+const RESERVED_WORDS = new Set(["attach", "bond", "cast", "continue", "detach", "main", "unbond"]);
 const MULTI_OPS = ["==","!=","<=",">=","&&","||","++","--","+=","-=","*=","/=", "<<", ">>"];
 const SINGLE_OPS = new Set(["+","-","*","/","%","=","<",">","!","&","|", "&", "^", "~"]);
 const PUNC = new Set(["(",")","{","}","[","]",";",",", ":",".","#", "?", "_"]);
@@ -76,16 +77,26 @@ function lex(code){
       i=j; continue;
     }
 
-    if(isAlpha(c)){
-      let j=i;
-      while(j<code.length && isAlphaNum(code[j])) j++;
-      let text = code.slice(i,j);
+    if (isAlpha(c)) {
+      let j = i;
+      while (j < code.length && isAlphaNum(code[j])) j++;
+      let text = code.slice(i, j);
+
+      let type = "Identifier";
+      if (KEYWORDS.has(text)) {
+        type = "Keyword";
+      } else if (RESERVED_WORDS.has(text)) {
+        type = "Reserved_Word";
+      }
+
       tokens.push({
-        token: KEYWORDS.has(text) ? "Keyword" : "Identifier",
-        lexeme:text,
-        line:startLine
+        token: type,
+        lexeme: text,
+        line: startLine
       });
-      i=j; continue;
+
+      i = j;
+      continue;
     }
 
     let m = MULTI_OPS.find(op => code.startsWith(op,i));
