@@ -54,21 +54,71 @@ function lex(code){
       i=j; continue;
     }
 
-    if(c === "/" && code[i+1] === "*"){
-      let j=i+2;
-      while(j<code.length && !(code[j-1]=="*" && code[j]=="/")) j++;
+    if (c === "/" && code[i+1] === "*") {
+      let j = i + 2;
+      let closed = false;
+
+    while (j < code.length) {
+      if (code[j] === "\n") line++;
+      if (code[j - 1] === "*" && code[j] === "/") {
+        closed = true;
+        j++;
+        break;
+      }
       j++;
-      tokens.push({ token:"Comment", lexeme:code.slice(i,j), line:startLine });
-      i=j; continue;
     }
 
-    if(c === '"'){
-      let j=i+1;
-      while(j<code.length && code[j] !== '"') j++;
-      j++;
-      tokens.push({ token:"String_literal", lexeme:code.slice(i,j), line:startLine });
-      i=j; continue;
+    if (!closed) {
+      tokens.push({
+        token: "LEXICAL_ERROR",
+        lexeme: code.slice(i),
+        line: startLine
+      });
+      break;
     }
+
+    tokens.push({
+      token: "Comment",
+      lexeme: code.slice(i, j),
+      line: startLine
+    });
+
+    i = j;
+    continue;
+  }
+
+    if (c === '"') {
+      let j = i + 1;
+      let closed = false;
+
+    while (j < code.length) {
+      if (code[j] === "\n") line++;
+      if (code[j] === '"') {
+        closed = true;
+        j++;
+        break;
+      }
+      j++;
+    }
+
+    if (!closed) {
+      tokens.push({
+        token: "LEXICAL_ERROR",
+        lexeme: code.slice(i),
+        line: startLine
+      });
+      break;
+    }
+
+    tokens.push({
+      token: "String_literal",
+      lexeme: code.slice(i, j),
+      line: startLine
+    });
+
+    i = j;
+    continue;
+  }
 
     if(isDigit(c)){
       let j=i;
@@ -133,14 +183,16 @@ function analyze(){
   tbody.innerHTML = "";
 
   tokens.forEach((t, i) => {
-    tbody.innerHTML += `
-      <tr>
-        <td>${i + 1}</td>
-        <td>${t.lexeme.replace(/</g,"&lt;")}</td>
-        <td>${resolveTokenName(t.token, t.lexeme)}</td>
-        <td>${t.line}</td>
-      </tr>`;
-  });
+  const isError = t.token === "LEXICAL_ERROR";
+
+  tbody.innerHTML += `
+    <tr class="${isError ? "error-row" : ""}">
+      <td>${i + 1}</td>
+      <td>${t.lexeme.replace(/</g,"&lt;")}</td>
+      <td>${resolveTokenName(t.token, t.lexeme)}</td>
+      <td>${t.line}</td>
+    </tr>`;
+});
 }
 
 function insertSample(){

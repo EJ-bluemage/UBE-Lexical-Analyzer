@@ -256,6 +256,21 @@ td {
         color: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     }
 
+tbody tr.error-row {
+    background: #fee2e2 !important;
+    color: #7f1d1d;
+    font-weight: bold;
+}
+
+tbody tr.error-row:hover {
+    background: #fecaca !important;
+    transform: none;
+}
+
+tbody tr.error-row td {
+    border-bottom: 1px solid #fca5a5;
+}
+
 @media (max-width:900px) {
     .container {
         padding: 12px;
